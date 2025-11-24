@@ -1,0 +1,142 @@
+.container {
+    min-height: 100vh;
+    background: var(--bg-primary);
+    padding-bottom: 80px;
+}
+
+.header {
+    padding: var(--spacing-lg);
+    background: var(--bg-secondary);
+    text-align: center;
+}
+
+.header h1 {
+    font-size: 28px;
+    margin-bottom: var(--spacing-sm);
+}
+
+.leaderboardList {
+    padding: var(--spacing-md);
+}
+
+.playerCard {
+    background: var(--card-bg);
+    padding: var(--spacing-md);
+    border-radius: var(--radius-lg);
+    margin-bottom: var(--spacing-sm);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    transition: all 0.2s ease;
+}
+
+.playerCard.highlighted {
+    background: var(--card-hover);
+    border: 2px solid var(--accent-cyan);
+    box-shadow: 0 0 0 4px rgba(0, 212, 255, 0.1);
+}
+
+.playerCard.top1,
+.playerCard.top2,
+.playerCard.top3 {
+    background: linear-gradient(135deg, var(--card-bg) 0%, var(--card-hover) 100%);
+    border: 1px solid rgba(255, 215, 0, 0.3);
+}
+
+.rankBadge {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 18px;
+    flex-shrink: 0;
+}
+
+.medal {
+    font-size: 28px;
+}
+
+.playerPhoto {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.playerPhoto img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.playerInfo {
+    flex: 1;
+}
+
+.playerInfo h3 {
+    font-size: 16px;
+    margin-bottom: 4px;
+}
+
+.playerStats {
+    display: flex;
+    gap: var(--spacing-lg);
+}
+
+.stat {
+    text-align: center;
+}
+
+.statValue {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--accent-cyan);
+    margin-bottom: 2px;
+}
+
+.statLabel {
+    font-size: 11px;
+    color: var(--text-secondary);
+}
+
+.nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--card-bg);
+    border-top: 1px solid var(--text-muted);
+    display: flex;
+    justify-content: space-around;
+    padding: var(--spacing-sm) 0;
+}
+
+.navItem {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: var(--spacing-sm);
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.navItem span:first-child {
+    font-size: 24px;
+}
+
+.navItem.active {
+    color: var(--accent-cyan);
+}
+
+.navItem:hover {
+    color: var(--accent-cyan);
+}

@@ -1,0 +1,40 @@
+# Manual Cleanup Required
+
+**Note:** Some files could not be automatically deleted because they are currently locked by system processes.
+
+## Files to Remove Manually
+
+1. **Database Files** (locked by SQLite process):
+   - `swinder.db`
+   - `swinder.db-shm`
+   - `swinder.db-wal`
+
+2. **Dependencies** (contains locked files):
+   - `node_modules/` directory
+
+## How to Remove
+
+### Option 1: Close All Apps and Delete
+1. Close VS Code and any other applications
+2. Close any terminal windows
+3. Right-click and delete the files/folders in File Explorer
+
+### Option 2: Use PowerShell (Run as Administrator)
+```powershell
+# Navigate to project directory
+cd "c:\Users\musef\.gemini\antigravity\playground\charged-sagan"
+
+# Force delete database files
+Remove-Item -Force swinder.db*
+
+# Force delete node_modules
+Remove-Item -Recurse -Force node_modules
+```
+
+### Option 3: Restart and Delete
+1. Restart your computer
+2. Navigate to the project folder
+3. Delete the files normally
+
+## These files are not needed for fresh development
+All necessary information has been preserved in the master plan documents.

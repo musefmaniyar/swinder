@@ -1,0 +1,232 @@
+.container {
+    min-height: 100vh;
+    background: var(--bg-primary);
+    padding-bottom: 80px;
+}
+
+.header {
+    padding: var(--spacing-lg);
+    background: var(--bg-secondary);
+    text-align: center;
+}
+
+.header h1 {
+    font-size: 28px;
+}
+
+.statsGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-md);
+    padding: var(--spacing-md);
+}
+
+.statCard {
+    background: var(--card-bg);
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-lg);
+    text-align: center;
+}
+
+.statValue {
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--accent-cyan);
+    margin-bottom: var(--spacing-sm);
+}
+
+.statLabel {
+    font-size: 14px;
+    color: var(--text-secondary);
+}
+
+.section {
+    padding: var(--spacing-md);
+}
+
+.sectionHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-md);
+}
+
+.sectionHeader h2 {
+    font-size: 20px;
+}
+
+.btn-sm {
+    padding: 8px 16px;
+    font-size: 14px;
+}
+
+.resultsList {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+.resultCard {
+    background: var(--card-bg);
+    padding: var(--spacing-md);
+    border-radius: var(--radius-md);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.opponent {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.opponent img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.opponent h3 {
+    font-size: 16px;
+    margin-bottom: 4px;
+}
+
+.resultInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: var(--spacing-xs);
+}
+
+.resultBadge {
+    padding: 4px 12px;
+    border-radius: var(--radius-sm);
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.resultBadge.win {
+    background: rgba(0, 255, 136, 0.1);
+    color: var(--success);
+    border: 1px solid var(--success);
+}
+
+.resultBadge.loss {
+    background: rgba(255, 0, 110, 0.1);
+    color: var(--error);
+    border: 1px solid var(--error);
+}
+
+.resultBadge.draw {
+    background: rgba(0, 212, 255, 0.1);
+    color: var(--accent-cyan);
+    border: 1px solid var(--accent-cyan);
+}
+
+.statusBadge {
+    padding: 4px 12px;
+    border-radius: var(--radius-sm);
+    font-size: 11px;
+}
+
+.statusBadge.approved {
+    background: rgba(0, 255, 136, 0.1);
+    color: var(--success);
+}
+
+.statusBadge.pending {
+    background: rgba(255, 214, 10, 0.1);
+    color: var(--warning);
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: var(--spacing-md);
+}
+
+.modalContent {
+    background: var(--card-bg);
+    border-radius: var(--radius-xl);
+    max-width: 500px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.modalHeader {
+    padding: var(--spacing-lg);
+    border-bottom: 1px solid var(--text-muted);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modalHeader h2 {
+    font-size: 20px;
+}
+
+.closeButton {
+    background: none;
+    border: none;
+    font-size: 32px;
+    color: var(--text-secondary);
+    cursor: pointer;
+    line-height: 1;
+}
+
+.form {
+    padding: var(--spacing-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--card-bg);
+    border-top: 1px solid var(--text-muted);
+    display: flex;
+    justify-content: space-around;
+    padding: var(--spacing-sm) 0;
+}
+
+.navItem {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: var(--spacing-sm);
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.navItem span:first-child {
+    font-size: 24px;
+}
+
+.navItem.active {
+    color: var(--accent-cyan);
+}
+
+.navItem:hover {
+    color: var(--accent-cyan);
+}
