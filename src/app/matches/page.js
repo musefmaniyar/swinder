@@ -1,54 +1,98 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import styles from './matches.module.css'
 
-const MOCK_MATCHES = [
-    {
-        id: '1',
-        match_user_id: '1',
-        match_user_name: 'Ahmed',
-        match_user_photo: 'https://i.pravatar.cc/150?img=12',
-        match_user_skill: 4,
-        created_at: new Date().toISOString()
-    },
-    {
-        id: '2',
-        match_user_id: '2',
-        match_user_name: 'Sara',
-        match_user_photo: 'https://i.pravatar.cc/150?img=45',
-        match_user_skill: 3,
-        created_at: new Date(Date.now() - 86400000).toISOString()
-    },
-    {
-        id: '3',
-        match_user_id: '3',
-        match_user_name: 'Fatima',
-        match_user_photo: 'https://i.pravatar.cc/150?img=23',
-        match_user_skill: 4,
-        created_at: new Date(Date.now() - 172800000).toISOString()
-    }
-]
-
 export default function MatchesPage() {
     const router = useRouter()
-    const [matches] = useState(MOCK_MATCHES)
+    const [matches, setMatches] = useState([])
+    const [loading, setLoading] = useState(true)
+    const [error, setError] = useState(null)
+
+    useEffect(() => {
+        fetchMatches()
+    }, [])
+
+    const fetchMatches = async () => {
+        setLoading(true)
+        setError(null)
+
+        try {
+            const res = await fetch('/api/matches/list')
+
+            if (!res.ok) {
+                throw new Error('Failed to load matches')
+            }
+
+            const data = await res.json()
+            setMatches(data.matches || [])
+        } catch (err) {
+            console.error('Fetch matches error:', err)
+            setError(err.message)
+        } finally {
+            setLoading(false)
+        }
+    }
+
+    if (loading) {
+        return (
+            <div className={styles.container}>
+                <div className={styles.header}>
+                    <h1>💬 Matches</h1>
+                </div>
+                <div className="flex items-center justify-center" style={{ minHeight: '60vh' }}>
+                    <div className="spinner"></div>
+                </div>
+                <nav className={styles.nav}>
+                    <button className={styles.navItem} onClick={() => router.push('/home')}>
+                        <span>🏠</span>
+                        <span>Home</span>
+                    </button>
+                    <button className={styles.navItem + ' ' + styles.active}>
+                        <span>💬</span>
+                        <span>Matches</span>
+                    </button>
+                    <button className={styles.navItem} onClick={() => router.push('/records')}>
+                        <span>📊</span>
+                        <span>Records</span>
+                    </button>
+                    <button className={styles.navItem} onClick={() => router.push('/leaderboard')}>
+                        <span>🏆</span>
+                        <span>Leaderboard</span>
+                    </button>
+                    <button className={styles.navItem} onClick={() => router.push('/profile')}>
+                        <span>👤</span>
+                        <span>Profile</span>
+                    </button>
+                </nav>
+            </div>
+        )
+    }
 
     return (
         <div className={styles.container}>
             <div className={styles.header}>
                 <h1>💬 Matches</h1>
-                <p className="text-muted">{matches.length} matches</p>
+                <p className="text-muted">{matches.length} {matches.length === 1 ? 'match' : 'matches'}</p>
             </div>
 
             <div className={styles.matchList}>
-                {matches.length === 0 ? (
+                {error ? (
+                    <div className={styles.emptyState}>
+                        <div className={styles.emptyIcon}>😕</div>
+                        <h2>Error Loading Matches</h2>
+                        <p className="text-muted">{error}</p>
+                        <button className="btn btn-primary" onClick={fetchMatches}>
+                            Try Again
+                        </button>
+                    </div>
+                ) : matches.length === 0 ? (
                     <div className={styles.emptyState}>
                         <div className={styles.emptyIcon}>😔</div>
                         <h2>No Matches Yet</h2>
                         <p className="text-muted">Start swiping to find Padel partners!</p>
-                        <button className="btn btn-primary" onClick={() => router.push('/home')}>
+                        <button className="btn btnprimary" onClick={() => router.push('/home')}>
                             Start Swiping
                         </button>
                     </div>
