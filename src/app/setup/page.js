@@ -26,16 +26,50 @@ function SetupForm() {
     const times = ['Morning', 'Afternoon', 'Evening', 'Night']
     const areas = ['Dubai Marina', 'JBR', 'Business Bay', 'Downtown', 'Jumeirah', 'Sports City', 'Arabian Ranches']
 
-    const avatarOptions = [
-        'https://i.pravatar.cc/300?img=12',
-        'https://i.pravatar.cc/300?img=33',
-        'https://i.pravatar.cc/300?img=51',
-        'https://i.pravatar.cc/300?img=61',
-        'https://i.pravatar.cc/300?img=23',
-        'https://i.pravatar.cc/300?img=45',
-        'https://i.pravatar.cc/300?img=38',
-        'https://i.pravatar.cc/300?img=44',
+    // Gaming-style avatar icons
+    const avatarIcons = [
+        { emoji: '🎾', name: 'Tennis Pro', color: '#00d4ff' },
+        { emoji: '⚡', name: 'Lightning', color: '#ffd60a' },
+        { emoji: '🔥', name: 'Fire', color: '#ff006e' },
+        { emoji: '⭐', name: 'Star', color: '#00d4ff' },
+        { emoji: '🏆', name: 'Champion', color: '#ffd60a' },
+        { emoji: '🎯', name: 'Target', color: '#ff006e' },
+        { emoji: '💪', name: 'Strong', color: '#00d4ff' },
+        { emoji: '🚀', name: 'Rocket', color: '#ffd60a' },
+        { emoji: '👑', name: 'King', color: '#ff006e' },
+        { emoji: '💎', name: 'Diamond', color: '#00d4ff' },
+        { emoji: '🎮', name: 'Gamer', color: '#ffd60a' },
+        { emoji: '🌟', name: 'Shining', color: '#ff006e' },
     ]
+
+    const [uploadedImage, setUploadedImage] = useState(null)
+    const [uploadPreview, setUploadPreview] = useState(null)
+
+    const handleImageUpload = (e) => {
+        const file = e.target.files[0]
+        if (file) {
+            // Validate file type
+            if (!file.type.startsWith('image/')) {
+                alert('Please select an image file')
+                return
+            }
+
+            // Validate file size (max 5MB)
+            if (file.size > 5 * 1024 * 1024) {
+                alert('Image size must be less than 5MB')
+                return
+            }
+
+            // Create preview
+            const reader = new FileReader()
+            reader.onloadend = () => {
+                setUploadPreview(reader.result)
+                setUploadedImage(file)
+                handleChange('photo_url', reader.result) // Store base64 for now
+            }
+            reader.readAsDataURL(file)
+        }
+    }
 
     const handleChange = (field, value) => {
         setFormData(prev => ({ ...prev, [field]: value }))
@@ -235,19 +269,54 @@ function SetupForm() {
                 return (
                     <div className={styles.step}>
                         <h2>Choose Avatar</h2>
-                        <p className="text-muted">Pick your profile photo</p>
+                        <p className="text-muted">Pick an icon or upload your photo</p>
 
-                        <div className={styles.avatarGrid}>
-                            {avatarOptions.map((url, idx) => (
+                        {/* Gaming-Style Icons */}
+                        <h3 className="text-sm" style={{ marginTop: '1.5rem', marginBottom: '0.5rem' }}>Gaming Icons</h3>
+                        <div className={styles.avatarIconGrid}>
+                            {avatarIcons.map((icon, idx) => (
                                 <button
                                     key={idx}
                                     type="button"
-                                    className={`${styles.avatar} ${formData.photo_url === url ? styles.active : ''}`}
-                                    onClick={() => handleChange('photo_url', url)}
+                                    className={`${styles.avatarIcon} ${formData.photo_url === `icon:${icon.emoji}` ? styles.active : ''}`}
+                                    onClick={() => {
+                                        handleChange('photo_url', `icon:${icon.emoji}`)
+                                        setUploadPreview(null)
+                                    }}
+                                    style={{ '--icon-color': icon.color }}
                                 >
-                                    <img src={url} alt={`Avatar ${idx + 1}`} />
+                                    <div className={styles.iconEmoji}>{icon.emoji}</div>
+                                    <div className={styles.iconName}>{icon.name}</div>
                                 </button>
                             ))}
+                        </div>
+
+                        {/* Upload Option */}
+                        <h3 className="text-sm" style={{ marginTop: '1.5rem', marginBottom: '0.5rem' }}>Or Upload Photo</h3>
+                        <div className={styles.uploadSection}>
+                            <input
+                                type="file"
+                                id="photoUpload"
+                                accept="image/*"
+                                onChange={handleImageUpload}
+                                style={{ display: 'none' }}
+                            />
+                            <label htmlFor="photoUpload" className={styles.uploadButton}>
+                                {uploadPreview ? (
+                                    <div className={styles.uploadPreview}>
+                                        <img src={uploadPreview} alt="Preview" />
+                                        <div className={styles.uploadOverlay}>
+                                            <span>Change Photo</span>
+                                        </div>
+                                    </div>
+                                ) : (
+                                    <div className={styles.uploadPlaceholder}>
+                                        <div className={styles.uploadIcon}>📷</div>
+                                        <div>Upload Photo</div>
+                                        <div className="text-sm text-muted">Max 5MB</div>
+                                    </div>
+                                )}
+                            </label>
                         </div>
 
                         <div className="flex gap-md">
