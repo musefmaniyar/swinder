@@ -138,12 +138,12 @@
 }
 
 .actionButton.pass {
-    background: var(--error);
+    background: #ff4444;
     color: white;
 }
 
 .actionButton.like {
-    background: var(--accent-pink);
+    background: #00d900;
     color: white;
 }
 

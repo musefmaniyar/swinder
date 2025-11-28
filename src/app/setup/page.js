@@ -269,54 +269,21 @@ function SetupForm() {
                 return (
                     <div className={styles.step}>
                         <h2>Choose Avatar</h2>
-                        <p className="text-muted">Pick an icon or upload your photo</p>
+                        <p className="text-muted">Pick your style</p>
 
-                        {/* Gaming-Style Icons */}
-                        <h3 className="text-sm" style={{ marginTop: '1.5rem', marginBottom: '0.5rem' }}>Gaming Icons</h3>
                         <div className={styles.avatarIconGrid}>
                             {avatarIcons.map((icon, idx) => (
                                 <button
                                     key={idx}
                                     type="button"
                                     className={`${styles.avatarIcon} ${formData.photo_url === `icon:${icon.emoji}` ? styles.active : ''}`}
-                                    onClick={() => {
-                                        handleChange('photo_url', `icon:${icon.emoji}`)
-                                        setUploadPreview(null)
-                                    }}
+                                    onClick={() => handleChange('photo_url', `icon:${icon.emoji}`)}
                                     style={{ '--icon-color': icon.color }}
                                 >
                                     <div className={styles.iconEmoji}>{icon.emoji}</div>
                                     <div className={styles.iconName}>{icon.name}</div>
                                 </button>
                             ))}
-                        </div>
-
-                        {/* Upload Option */}
-                        <h3 className="text-sm" style={{ marginTop: '1.5rem', marginBottom: '0.5rem' }}>Or Upload Photo</h3>
-                        <div className={styles.uploadSection}>
-                            <input
-                                type="file"
-                                id="photoUpload"
-                                accept="image/*"
-                                onChange={handleImageUpload}
-                                style={{ display: 'none' }}
-                            />
-                            <label htmlFor="photoUpload" className={styles.uploadButton}>
-                                {uploadPreview ? (
-                                    <div className={styles.uploadPreview}>
-                                        <img src={uploadPreview} alt="Preview" />
-                                        <div className={styles.uploadOverlay}>
-                                            <span>Change Photo</span>
-                                        </div>
-                                    </div>
-                                ) : (
-                                    <div className={styles.uploadPlaceholder}>
-                                        <div className={styles.uploadIcon}>📷</div>
-                                        <div>Upload Photo</div>
-                                        <div className="text-sm text-muted">Max 5MB</div>
-                                    </div>
-                                )}
-                            </label>
                         </div>
 
                         <div className="flex gap-md">

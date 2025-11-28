@@ -88,7 +88,7 @@ export default function HomePage() {
         return (
             <div className={styles.container}>
                 <div className={styles.header}>
-                    <h1>🎾 Swinder</h1>
+                    <h1>Swinder</h1>
                 </div>
                 <div className="flex items-center justify-center" style={{ flex: 1 }}>
                     <div className="spinner"></div>
@@ -123,7 +123,7 @@ export default function HomePage() {
         return (
             <div className={styles.container}>
                 <div className={styles.header}>
-                    <h1>🎾 Swinder</h1>
+                    <h1>Swinder</h1>
                 </div>
                 <div className={styles.emptyState}>
                     <div className={styles.emptyIcon}>😕</div>
@@ -163,7 +163,7 @@ export default function HomePage() {
         return (
             <div className={styles.container}>
                 <div className={styles.header}>
-                    <h1>🎾 Swinder</h1>
+                    <h1>Swinder</h1>
                 </div>
 
                 <div className={styles.emptyState}>
@@ -204,8 +204,8 @@ export default function HomePage() {
     return (
         <div className={styles.container}>
             <div className={styles.header}>
-                <h1>🎾 Swinder</h1>
-                <p className="text-muted">Find Your Padel Partner</p>
+                <h1>Swinder</h1>
+                <p className="text-muted">Find Your Sports Partner</p>
             </div>
 
             <div className={styles.cardContainer}>
