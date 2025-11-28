@@ -54,22 +54,27 @@ function SetupForm() {
         setLoading(true)
 
         try {
+            console.log('Submitting profile setup...', formData)
+
             const res = await fetch('/api/user/setup', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData)
             })
 
+            const data = await res.json()
+            console.log('Setup response:', data)
+
             if (!res.ok) {
-                const error = await res.json()
-                throw new Error(error.error || 'Failed to create profile')
+                throw new Error(data.error || 'Failed to create profile')
             }
 
             // Profile created successfully, redirect to home
-            router.push('/home')
+            console.log('Profile created! Redirecting to home...')
+            window.location.href = '/home' // Force full page reload
         } catch (error) {
             console.error('Setup error:', error)
-            alert(error.message)
+            alert(error.message || 'Failed to create profile. Please try again.')
             setLoading(false)
         }
     }

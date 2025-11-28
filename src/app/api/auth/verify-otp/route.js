@@ -18,13 +18,17 @@ export async function POST(request) {
         // Check if user exists
         const existingUser = await getUserByPhone(phone)
 
+        console.log('Verify OTP:', { phone, existingUser: !!existingUser })
+
+        // Set session cookie for both new and existing users
         const response = NextResponse.json({
             success: true,
             isNewUser: !existingUser,
-            user: existingUser || null
+            user: existingUser || null,
+            phone: phone // Include phone for new users
         })
 
-        // Set session cookie
+        // Set session cookie if user exists
         if (existingUser) {
             response.cookies.set('userId', existingUser.id, {
                 httpOnly: true,
@@ -32,6 +36,17 @@ export async function POST(request) {
                 sameSite: 'lax',
                 maxAge: 60 * 60 * 24 * 30 // 30 days
             })
+            console.log('Session cookie set for existing user:', existingUser.id)
+        } else {
+            // For new users, we'll set a temporary phone cookie
+            // This will be replaced with userId after profile setup
+            response.cookies.set('tempPhone', phone, {
+                httpOnly: true,
+                secure: process.env.NODE_ENV === 'production',
+                sameSite: 'lax',
+                maxAge: 60 * 60 // 1 hour (short-lived)
+            })
+            console.log('Temporary phone cookie set for new user')
         }
 
         return response
