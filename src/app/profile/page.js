@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import styles from './profile.module.css'
+import BottomNav from '@/components/BottomNav'
 
 export default function ProfilePage() {
     const router = useRouter()
@@ -36,6 +37,17 @@ export default function ProfilePage() {
             setError(err.message)
         } finally {
             setLoading(false)
+        }
+    }
+
+    const handlePhotoUpload = (e) => {
+        const file = e.target.files[0]
+        if (file) {
+            const reader = new FileReader()
+            reader.onloadend = () => {
+                setEditForm({ ...editForm, photo_url: reader.result })
+            }
+            reader.readAsDataURL(file)
         }
     }
 
@@ -84,28 +96,7 @@ export default function ProfilePage() {
                 <div className="flex items-center justify-center" style={{ minHeight: '60vh' }}>
                     <div className="spinner"></div>
                 </div>
-                <nav className={styles.nav}>
-                    <button className={styles.navItem} onClick={() => router.push('/home')}>
-                        <span>🏠</span>
-                        <span>Home</span>
-                    </button>
-                    <button className={styles.navItem} onClick={() => router.push('/matches')}>
-                        <span>💬</span>
-                        <span>Matches</span>
-                    </button>
-                    <button className={styles.navItem} onClick={() => router.push('/records')}>
-                        <span>📊</span>
-                        <span>Records</span>
-                    </button>
-                    <button className={styles.navItem} onClick={() => router.push('/leaderboard')}>
-                        <span>🏆</span>
-                        <span>Leaderboard</span>
-                    </button>
-                    <button className={styles.navItem + ' ' + styles.active}>
-                        <span>👤</span>
-                        <span>Profile</span>
-                    </button>
-                </nav>
+                <BottomNav />
             </div>
         )
     }
@@ -122,28 +113,7 @@ export default function ProfilePage() {
                         Try Again
                     </button>
                 </div>
-                <nav className={styles.nav}>
-                    <button className={styles.navItem} onClick={() => router.push('/home')}>
-                        <span>🏠</span>
-                        <span>Home</span>
-                    </button>
-                    <button className={styles.navItem} onClick={() => router.push('/matches')}>
-                        <span>💬</span>
-                        <span>Matches</span>
-                    </button>
-                    <button className={styles.navItem} onClick={() => router.push('/records')}>
-                        <span>📊</span>
-                        <span>Records</span>
-                    </button>
-                    <button className={styles.navItem} onClick={() => router.push('/leaderboard')}>
-                        <span>🏆</span>
-                        <span>Leaderboard</span>
-                    </button>
-                    <button className={styles.navItem + ' ' + styles.active}>
-                        <span>👤</span>
-                        <span>Profile</span>
-                    </button>
-                </nav>
+                <BottomNav />
             </div>
         )
     }
@@ -205,6 +175,21 @@ export default function ProfilePage() {
                         <h2>Edit Profile</h2>
 
                         <form onSubmit={handleUpdateProfile}>
+                            <div className="flex flex-col items-center mb-6 gap-4">
+                                <div className={styles.profilePhoto} style={{ width: '100px', height: '100px' }}>
+                                    <img src={editForm.photo_url || user.photo_url} alt="Profile Preview" />
+                                </div>
+                                <label className="btn btn-secondary btn-sm cursor-pointer">
+                                    Change Photo
+                                    <input
+                                        type="file"
+                                        accept="image/*"
+                                        onChange={handlePhotoUpload}
+                                        style={{ display: 'none' }}
+                                    />
+                                </label>
+                            </div>
+
                             <input
                                 type="text"
                                 className="input"
@@ -255,28 +240,7 @@ export default function ProfilePage() {
                 </div>
             )}
 
-            <nav className={styles.nav}>
-                <button className={styles.navItem} onClick={() => router.push('/home')}>
-                    <span>🏠</span>
-                    <span>Home</span>
-                </button>
-                <button className={styles.navItem} onClick={() => router.push('/matches')}>
-                    <span>💬</span>
-                    <span>Matches</span>
-                </button>
-                <button className={styles.navItem} onClick={() => router.push('/records')}>
-                    <span>📊</span>
-                    <span>Records</span>
-                </button>
-                <button className={styles.navItem} onClick={() => router.push('/leaderboard')}>
-                    <span>🏆</span>
-                    <span>Leaderboard</span>
-                </button>
-                <button className={styles.navItem + ' ' + styles.active}>
-                    <span>👤</span>
-                    <span>Profile</span>
-                </button>
-            </nav>
+            <BottomNav />
         </div>
     )
 }

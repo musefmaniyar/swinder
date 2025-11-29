@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import styles from './home.module.css'
+import BottomNav from '@/components/BottomNav'
 
 export default function HomePage() {
     const router = useRouter()
@@ -93,28 +94,7 @@ export default function HomePage() {
                 <div className="flex items-center justify-center" style={{ flex: 1 }}>
                     <div className="spinner"></div>
                 </div>
-                <nav className={styles.nav}>
-                    <button className={styles.navItem + ' ' + styles.active}>
-                        <span>🏠</span>
-                        <span>Home</span>
-                    </button>
-                    <button className={styles.navItem} onClick={() => router.push('/matches')}>
-                        <span>💬</span>
-                        <span>Matches</span>
-                    </button>
-                    <button className={styles.navItem} onClick={() => router.push('/records')}>
-                        <span>📊</span>
-                        <span>Records</span>
-                    </button>
-                    <button className={styles.navItem} onClick={() => router.push('/leaderboard')}>
-                        <span>🏆</span>
-                        <span>Leaderboard</span>
-                    </button>
-                    <button className={styles.navItem} onClick={() => router.push('/profile')}>
-                        <span>👤</span>
-                        <span>Profile</span>
-                    </button>
-                </nav>
+                <BottomNav />
             </div>
         )
     }
@@ -133,28 +113,7 @@ export default function HomePage() {
                         Try Again
                     </button>
                 </div>
-                <nav className={styles.nav}>
-                    <button className={styles.navItem + ' ' + styles.active}>
-                        <span>🏠</span>
-                        <span>Home</span>
-                    </button>
-                    <button className={styles.navItem} onClick={() => router.push('/matches')}>
-                        <span>💬</span>
-                        <span>Matches</span>
-                    </button>
-                    <button className={styles.navItem} onClick={() => router.push('/records')}>
-                        <span>📊</span>
-                        <span>Records</span>
-                    </button>
-                    <button className={styles.navItem} onClick={() => router.push('/leaderboard')}>
-                        <span>🏆</span>
-                        <span>Leaderboard</span>
-                    </button>
-                    <button className={styles.navItem} onClick={() => router.push('/profile')}>
-                        <span>👤</span>
-                        <span>Profile</span>
-                    </button>
-                </nav>
+                <BottomNav />
             </div>
         )
     }
@@ -270,28 +229,7 @@ export default function HomePage() {
                 </div>
             )}
 
-            <nav className={styles.nav}>
-                <button className={styles.navItem + ' ' + styles.active}>
-                    <span>🏠</span>
-                    <span>Home</span>
-                </button>
-                <button className={styles.navItem} onClick={() => router.push('/matches')}>
-                    <span>💬</span>
-                    <span>Matches</span>
-                </button>
-                <button className={styles.navItem} onClick={() => router.push('/records')}>
-                    <span>📊</span>
-                    <span>Records</span>
-                </button>
-                <button className={styles.navItem} onClick={() => router.push('/leaderboard')}>
-                    <span>🏆</span>
-                    <span>Leaderboard</span>
-                </button>
-                <button className={styles.navItem} onClick={() => router.push('/profile')}>
-                    <span>👤</span>
-                    <span>Profile</span>
-                </button>
-            </nav>
+            <BottomNav />
         </div>
     )
 }

@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import styles from './records.module.css'
+import BottomNav from '@/components/BottomNav'
 
 export default function RecordsPage() {
     const router = useRouter()
@@ -80,28 +81,7 @@ export default function RecordsPage() {
                 <div className="flex items-center justify-center" style={{ minHeight: '60vh' }}>
                     <div className="spinner"></div>
                 </div>
-                <nav className={styles.nav}>
-                    <button className={styles.navItem} onClick={() => router.push('/home')}>
-                        <span>🏠</span>
-                        <span>Home</span>
-                    </button>
-                    <button className={styles.navItem} onClick={() => router.push('/matches')}>
-                        <span>💬</span>
-                        <span>Matches</span>
-                    </button>
-                    <button className={styles.navItem + ' ' + styles.active}>
-                        <span>📊</span>
-                        <span>Records</span>
-                    </button>
-                    <button className={styles.navItem} onClick={() => router.push('/leaderboard')}>
-                        <span>🏆</span>
-                        <span>Leaderboard</span>
-                    </button>
-                    <button className={styles.navItem} onClick={() => router.push('/profile')}>
-                        <span>👤</span>
-                        <span>Profile</span>
-                    </button>
-                </nav>
+                <BottomNav />
             </div>
         )
     }
@@ -228,28 +208,7 @@ export default function RecordsPage() {
                 </div>
             )}
 
-            <nav className={styles.nav}>
-                <button className={styles.navItem} onClick={() => router.push('/home')}>
-                    <span>🏠</span>
-                    <span>Home</span>
-                </button>
-                <button className={styles.navItem} onClick={() => router.push('/matches')}>
-                    <span>💬</span>
-                    <span>Matches</span>
-                </button>
-                <button className={styles.navItem + ' ' + styles.active}>
-                    <span>📊</span>
-                    <span>Records</span>
-                </button>
-                <button className={styles.navItem} onClick={() => router.push('/leaderboard')}>
-                    <span>🏆</span>
-                    <span>Leaderboard</span>
-                </button>
-                <button className={styles.navItem} onClick={() => router.push('/profile')}>
-                    <span>👤</span>
-                    <span>Profile</span>
-                </button>
-            </nav>
+            <BottomNav />
         </div>
     )
 }

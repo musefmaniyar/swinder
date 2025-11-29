@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import styles from './leaderboard.module.css'
+import BottomNav from '@/components/BottomNav'
 
 export default function LeaderboardPage() {
     const router = useRouter()
@@ -65,28 +66,7 @@ export default function LeaderboardPage() {
                 <div className="flex items-center justify-center" style={{ minHeight: '60vh' }}>
                     <div className="spinner"></div>
                 </div>
-                <nav className={styles.nav}>
-                    <button className={styles.navItem} onClick={() => router.push('/home')}>
-                        <span>🏠</span>
-                        <span>Home</span>
-                    </button>
-                    <button className={styles.navItem} onClick={() => router.push('/matches')}>
-                        <span>💬</span>
-                        <span>Matches</span>
-                    </button>
-                    <button className={styles.navItem} onClick={() => router.push('/records')}>
-                        <span>📊</span>
-                        <span>Records</span>
-                    </button>
-                    <button className={styles.navItem + ' ' + styles.active}>
-                        <span>🏆</span>
-                        <span>Leaderboard</span>
-                    </button>
-                    <button className={styles.navItem} onClick={() => router.push('/profile')}>
-                        <span>👤</span>
-                        <span>Profile</span>
-                    </button>
-                </nav>
+                <BottomNav />
             </div>
         )
     }
@@ -95,7 +75,7 @@ export default function LeaderboardPage() {
         <div className={styles.container}>
             <div className={styles.header}>
                 <h1>🏆 Leaderboard</h1>
-                <p className="text-muted">Top Padel Players</p>
+                <p className="text-muted">Top Players</p>
             </div>
 
             <div className={styles.leaderboardList}>
@@ -149,28 +129,7 @@ export default function LeaderboardPage() {
                 )}
             </div>
 
-            <nav className={styles.nav}>
-                <button className={styles.navItem} onClick={() => router.push('/home')}>
-                    <span>🏠</span>
-                    <span>Home</span>
-                </button>
-                <button className={styles.navItem} onClick={() => router.push('/matches')}>
-                    <span>💬</span>
-                    <span>Matches</span>
-                </button>
-                <button className={styles.navItem} onClick={() => router.push('/records')}>
-                    <span>📊</span>
-                    <span>Records</span>
-                </button>
-                <button className={styles.navItem + ' ' + styles.active}>
-                    <span>🏆</span>
-                    <span>Leaderboard</span>
-                </button>
-                <button className={styles.navItem} onClick={() => router.push('/profile')}>
-                    <span>👤</span>
-                    <span>Profile</span>
-                </button>
-            </nav>
+            <BottomNav />
         </div>
     )
 }

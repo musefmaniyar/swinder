@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import styles from './matches.module.css'
+import BottomNav from '@/components/BottomNav'
 
 export default function MatchesPage() {
     const router = useRouter()
@@ -44,28 +45,7 @@ export default function MatchesPage() {
                 <div className="flex items-center justify-center" style={{ minHeight: '60vh' }}>
                     <div className="spinner"></div>
                 </div>
-                <nav className={styles.nav}>
-                    <button className={styles.navItem} onClick={() => router.push('/home')}>
-                        <span>🏠</span>
-                        <span>Home</span>
-                    </button>
-                    <button className={styles.navItem + ' ' + styles.active}>
-                        <span>💬</span>
-                        <span>Matches</span>
-                    </button>
-                    <button className={styles.navItem} onClick={() => router.push('/records')}>
-                        <span>📊</span>
-                        <span>Records</span>
-                    </button>
-                    <button className={styles.navItem} onClick={() => router.push('/leaderboard')}>
-                        <span>🏆</span>
-                        <span>Leaderboard</span>
-                    </button>
-                    <button className={styles.navItem} onClick={() => router.push('/profile')}>
-                        <span>👤</span>
-                        <span>Profile</span>
-                    </button>
-                </nav>
+                <BottomNav />
             </div>
         )
     }
@@ -91,7 +71,7 @@ export default function MatchesPage() {
                     <div className={styles.emptyState}>
                         <div className={styles.emptyIcon}>😔</div>
                         <h2>No Matches Yet</h2>
-                        <p className="text-muted">Start swiping to find Padel partners!</p>
+                        <p className="text-muted">Start swiping to find partners!</p>
                         <button className="btn btnprimary" onClick={() => router.push('/home')}>
                             Start Swiping
                         </button>
@@ -120,28 +100,7 @@ export default function MatchesPage() {
                 )}
             </div>
 
-            <nav className={styles.nav}>
-                <button className={styles.navItem} onClick={() => router.push('/home')}>
-                    <span>🏠</span>
-                    <span>Home</span>
-                </button>
-                <button className={styles.navItem + ' ' + styles.active}>
-                    <span>💬</span>
-                    <span>Matches</span>
-                </button>
-                <button className={styles.navItem} onClick={() => router.push('/records')}>
-                    <span>📊</span>
-                    <span>Records</span>
-                </button>
-                <button className={styles.navItem} onClick={() => router.push('/leaderboard')}>
-                    <span>🏆</span>
-                    <span>Leaderboard</span>
-                </button>
-                <button className={styles.navItem} onClick={() => router.push('/profile')}>
-                    <span>👤</span>
-                    <span>Profile</span>
-                </button>
-            </nav>
+            <BottomNav />
         </div>
     )
 }
